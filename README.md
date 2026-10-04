@@ -2,8 +2,6 @@
 
 An HR team sees one in six employees leave but cannot tell where it happens, why, or who is likely to go next, so retention money gets spread across everyone. This Power BI report answers all three and ends with an early-warning list: **295 current employees who carry three or more risk flags**, a group where 35% have already left.
 
-> **Data:** [IBM HR Analytics Employee Attrition](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset), a public sample dataset of 1,470 fictional employees and 35 columns, created by IBM data scientists. This is a demo on public data, not work for IBM. It is one snapshot with no dates, so "trend" here means across bands (tenure, pay, age), not over time.
-
 ## What it found
 
 | Question | Answer |
@@ -69,11 +67,15 @@ RETURN INT ( _OverTime ) + INT ( _Single ) + INT ( _EntryLevel ) + INT ( _NoStoc
 
 One snapshot with no dates, so there is no true time trend; no exit reasons, so the drivers are correlations, not proven causes; some groups are small (six flags: four people). The next step is monthly HR snapshots and exit-interview reasons, then a pilot of actions 1 and 2 in Sales and Lab Tech.
 
+## Data
+
+[IBM HR Analytics Employee Attrition](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset) on Kaggle: 1,470 fictional employees and 35 columns, created by IBM data scientists. This is not work for IBM. It is one snapshot with no dates, so "trend" here means across bands (tenure, pay, age), not over time.
+
 ## Open it
 
 1. Install [Power BI Desktop](https://www.microsoft.com/power-bi/desktop) (free, Windows).
 2. Open `HR_Attrition_Dashboard.pbix`. The data is stored in the file, so the report works without the source.
-3. To refresh from source, download the dataset from Kaggle and point the staging query at it (Transform data, then Data source settings).
+3. To refresh from source, download the data from Kaggle and point the staging query at it (Transform data, then Data source settings).
 
 ---
 

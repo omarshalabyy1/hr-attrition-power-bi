@@ -1,0 +1,102 @@
+// DAX from HR_Attrition_Dashboard.pbix, copied out of the model as is.
+
+// ---- Measures (table _Measures) ----
+
+Headcount =
+COUNTROWS ( fact_employee )
+
+Leavers =
+SUM ( fact_employee[AttritionFlag] )
+
+Attrition Rate % =
+VAR _Leavers = [Leavers]
+VAR _Headcount = [Headcount]
+RETURN DIVIDE ( _Leavers, _Headcount )
+
+Active Employees =
+VAR _Headcount = [Headcount]
+VAR _Leavers = [Leavers]
+RETURN _Headcount - _Leavers
+
+Company Attrition Rate % =
+CALCULATE ( [Attrition Rate %], REMOVEFILTERS () )
+
+Income Gap Stayers vs Leavers =
+VAR _Stayers =
+    CALCULATE ( AVERAGE ( fact_employee[MonthlyIncome] ), fact_employee[AttritionFlag] = 0 )
+VAR _Leavers =
+    CALCULATE ( AVERAGE ( fact_employee[MonthlyIncome] ), fact_employee[AttritionFlag] = 1 )
+RETURN
+    _Stayers - _Leavers
+
+Early Tenure Leavers % =
+VAR _EarlyLeavers = CALCULATE ( [Leavers], fact_employee[YearsAtCompany] <= 2 )
+VAR _AllLeavers = [Leavers]
+RETURN DIVIDE ( _EarlyLeavers, _AllLeavers )
+
+OverTime Attrition Rate % =
+CALCULATE ( [Attrition Rate %], dim_overtime[OverTime] = "Yes" )
+
+No OverTime Attrition Rate % =
+CALCULATE ( [Attrition Rate %], dim_overtime[OverTime] = "No" )
+
+Income Outlier Threshold =
+VAR _Q1 = PERCENTILE.INC ( fact_employee[MonthlyIncome], 0.25 )
+VAR _Q3 = PERCENTILE.INC ( fact_employee[MonthlyIncome], 0.75 )
+RETURN _Q3 + 1.5 * ( _Q3 - _Q1 )
+
+Income Outliers Attrition % =
+VAR _Threshold = [Income Outlier Threshold]
+RETURN CALCULATE ( [Attrition Rate %], fact_employee[MonthlyIncome] > _Threshold )
+
+High-Risk Active Employees =
+VAR _ActiveHighRisk = FILTER ( fact_employee, fact_employee[AttritionFlag] = 0 && fact_employee[Risk Flags] >= 3 )
+RETURN COUNTROWS ( _ActiveHighRisk )
+
+Income Outliers Count =
+VAR _Threshold = [Income Outlier Threshold]
+RETURN COUNTROWS ( FILTER ( fact_employee, fact_employee[MonthlyIncome] > _Threshold ) )
+
+Tenure Outlier Threshold =
+VAR _Q1 = PERCENTILE.INC ( fact_employee[YearsAtCompany], 0.25 )
+VAR _Q3 = PERCENTILE.INC ( fact_employee[YearsAtCompany], 0.75 )
+RETURN _Q3 + 1.5 * ( _Q3 - _Q1 )
+
+Tenure Outliers Count =
+VAR _Threshold = [Tenure Outlier Threshold]
+RETURN COUNTROWS ( FILTER ( fact_employee, fact_employee[YearsAtCompany] > _Threshold ) )
+
+// ---- Calculated columns (table fact_employee) ----
+
+Age Band =
+VAR _Age = fact_employee[Age]
+RETURN SWITCH ( TRUE (), _Age <= 25, "18-25", _Age <= 35, "26-35", _Age <= 45, "36-45", _Age <= 55, "46-55", "56+" )
+
+Age Band Sort =
+VAR _Age = fact_employee[Age]
+RETURN SWITCH ( TRUE (), _Age <= 25, 1, _Age <= 35, 2, _Age <= 45, 3, _Age <= 55, 4, 5 )
+
+Tenure Band =
+VAR _Years = fact_employee[YearsAtCompany]
+RETURN SWITCH ( TRUE (), _Years <= 2, "0-2", _Years <= 5, "3-5", _Years <= 10, "6-10", "10+" )
+
+Tenure Band Sort =
+VAR _Years = fact_employee[YearsAtCompany]
+RETURN SWITCH ( TRUE (), _Years <= 2, 1, _Years <= 5, 2, _Years <= 10, 3, 4 )
+
+Income Band =
+VAR _Income = fact_employee[MonthlyIncome]
+RETURN SWITCH ( TRUE (), _Income < 3000, "<3k", _Income < 6000, "3-6k", _Income < 10000, "6-10k", "10k+" )
+
+Income Band Sort =
+VAR _Income = fact_employee[MonthlyIncome]
+RETURN SWITCH ( TRUE (), _Income < 3000, 1, _Income < 6000, 2, _Income < 10000, 3, 4 )
+
+Risk Flags =
+VAR _OverTime = RELATED ( dim_overtime[OverTime] ) = "Yes"
+VAR _Single = RELATED ( dim_marital_status[MaritalStatus] ) = "Single"
+VAR _EntryLevel = fact_employee[JobLevel] = 1
+VAR _NoStock = fact_employee[StockOptionLevel] = 0
+VAR _EarlyTenure = fact_employee[YearsAtCompany] <= 2
+VAR _LowEnvSat = fact_employee[EnvironmentSatisfaction] = 1
+RETURN INT ( _OverTime ) + INT ( _Single ) + INT ( _EntryLevel ) + INT ( _NoStock ) + INT ( _EarlyTenure ) + INT ( _LowEnvSat )

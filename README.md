@@ -57,6 +57,20 @@ Found with the 1.5 × IQR rule and kept in the model: 114 employees earn above 1
 4. **Redesign the Sales Representative role:** targets, commission, a path to Sales Executive. KPI: Sales Representative attrition.
 5. **The early-warning list,** sent monthly to HR business partners for stay interviews. KPI: attrition inside the flagged group.
 
+## 📊 The Power BI report
+
+**Overview:** where people leave, by department, role, tenure and marital status.
+
+![Power BI Overview page: 1,470 employees, 237 leavers, 16.12% attrition rate and 295 at risk now; attrition by department, job role, tenure and marital status](images/pbi-overview.png)
+
+**Drivers:** overtime, job level, pay and the risk flags.
+
+![Power BI Drivers page: 30.53% attrition with overtime against 10.44% without, a pay gap of 2,046 between stayers and leavers, 43.04% of leavers in their first two years, and attrition rising with each risk flag](images/pbi-drivers.png)
+
+**Trends and Outliers:** the 1.5 × IQR outliers and attrition across bands.
+
+![Power BI Trends and Outliers page: 114 high-income outliers above 16,581 with 4.39% attrition, 104 tenure outliers, attrition by education field, involvement and travel, and a scatter of income against years at the company](images/pbi-trends-outliers.png)
+
 ## 🏗️ How it is built
 
 ![Star schema: fact_employee and seven dimensions](images/data-model.png)

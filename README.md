@@ -3,6 +3,10 @@
 </p>
 
 <p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=2DD4BF&center=true&vCenter=true&width=760&lines=One+in+six+employees+leave;Where%3F+Why%3F+Who+is+next%3F;295+people+flagged+before+they+go" alt="One in six employees leave">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Power_BI-DAX_%26_Power_Query-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI, DAX and Power Query">
   <img src="https://img.shields.io/badge/SQL-Check-0E1630?style=for-the-badge" alt="SQL check">
 </p>
@@ -12,6 +16,10 @@
 An HR team sees one in six employees leave but cannot tell where it happens, why, or who is likely to go next, so retention money gets spread across everyone. This Power BI report answers all three and ends with an early-warning list: **295 current employees who carry three or more risk flags**, a group where 35% have already left.
 
 ## 📈 What it found
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/221352987-68da234d-4d62-4e9d-9d7f-098dc657c2dc.gif" width="100" alt="Moving chart">
+</p>
 
 | Question | Answer |
 |---|---|
@@ -82,6 +90,10 @@ One snapshot with no dates, so there is no true time trend; no exit reasons, so 
 
 ## ▶️ Open it
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284087-bbe7e430-757e-4901-90bf-4cd2ce3e1852.gif" width="100" alt="Code">
+</p>
+
 1. Install [Power BI Desktop](https://www.microsoft.com/power-bi/desktop) (free, Windows).
 2. Open `HR_Attrition_Dashboard.pbix`. The data is stored in the file, so the report works without the source.
 3. To refresh from source, download the data from Kaggle and point the staging query at it (Transform data, then Data source settings).
@@ -89,3 +101,7 @@ One snapshot with no dates, so there is no true time trend; no exit reasons, so 
 ---
 
 Built by [Omar Shalaby](https://github.com/omarshalabyy1) · Power BI, DAX, Power Query, SQL
+
+<p align="center">
+  <img width="100%" src="images/footer.svg" alt="Keep the people you cannot afford to lose.">
+</p>

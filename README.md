@@ -1,8 +1,17 @@
-# HR Attrition Dashboard (Power BI)
+<p align="center">
+  <img width="100%" src="images/header.svg" alt="HR attrition dashboard in Power BI: 237 of 1,470 employees left, a 16.1% attrition rate, and 295 current employees carry three or more risk flags.">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Power_BI-DAX_%26_Power_Query-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI, DAX and Power Query">
+  <img src="https://img.shields.io/badge/SQL-Check-0E1630?style=for-the-badge" alt="SQL check">
+</p>
+
+<h3 align="center">One in six employees leave. This finds where, why,<br>and the 295 people most likely to go next.</h3>
 
 An HR team sees one in six employees leave but cannot tell where it happens, why, or who is likely to go next, so retention money gets spread across everyone. This Power BI report answers all three and ends with an early-warning list: **295 current employees who carry three or more risk flags**, a group where 35% have already left.
 
-## What it found
+## 📈 What it found
 
 | Question | Answer |
 |---|---|
@@ -18,19 +27,19 @@ An HR team sees one in six employees leave but cannot tell where it happens, why
 
 ![The four drivers](images/drivers.png)
 
-## Risk flags: the early-warning list
+## 🚩 Risk flags: the early-warning list
 
 Each employee gets one flag for each of the six strongest single drivers: overtime, single, job level 1, no stock options, two years or less at the company, and low environment satisfaction. Attrition climbs as the flags stack: 4.6% with none, 24% with three, 42% with four and 75% with five (six flags is only four people). The 295 current employees with three or more flags are the list HR can act on this month.
 
 ![Attrition by number of risk flags](images/risk-flags.png)
 
-## Outliers
+## 🔍 Outliers
 
 Found with the 1.5 × IQR rule and kept in the model: 114 employees earn above 16,581 a month (all at job level 4 or 5) and only 4.4% of them leave; 104 have more than 18 years at the company, at 9.6%. They are senior, well-paid, long-serving staff, not data errors, and removing them would hide the finding that seniority and tenure protect retention.
 
 ![Income and tenure outliers](images/outliers.png)
 
-## Five actions, each with a KPI and an owner
+## ✅ Five actions, each with a KPI and an owner
 
 ![Five actions with evidence, KPI and owner](images/actions.png)
 
@@ -40,7 +49,7 @@ Found with the 1.5 × IQR rule and kept in the model: 114 employees earn above 1
 4. **Redesign the Sales Representative role:** targets, commission, a path to Sales Executive. KPI: Sales Representative attrition.
 5. **The early-warning list,** sent monthly to HR business partners for stay interviews. KPI: attrition inside the flagged group.
 
-## How it is built
+## 🏗️ How it is built
 
 ![Star schema: fact_employee and seven dimensions](images/data-model.png)
 
@@ -63,15 +72,15 @@ RETURN INT ( _OverTime ) + INT ( _Single ) + INT ( _EntryLevel ) + INT ( _NoStoc
 - **SQL check:** [`sql/attrition_by_department.sql`](sql/attrition_by_department.sql) counts leavers per department on the raw table (R&D 133, Sales 92, Human Resources 12), matching the report.
 - **Checks:** every number above was recomputed outside Power BI from the model's own tables.
 
-## Limits
+## ⚠️ Limits
 
 One snapshot with no dates, so there is no true time trend; no exit reasons, so the drivers are correlations, not proven causes; some groups are small (six flags: four people). The next step is monthly HR snapshots and exit-interview reasons, then a pilot of actions 1 and 2 in Sales and Lab Tech.
 
-## Data
+## 🗂️ Data
 
 [IBM HR Analytics Employee Attrition](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset) on Kaggle: 1,470 fictional employees and 35 columns, created by IBM data scientists. This is not work for IBM. It is one snapshot with no dates, so "trend" here means across bands (tenure, pay, age), not over time.
 
-## Open it
+## ▶️ Open it
 
 1. Install [Power BI Desktop](https://www.microsoft.com/power-bi/desktop) (free, Windows).
 2. Open `HR_Attrition_Dashboard.pbix`. The data is stored in the file, so the report works without the source.

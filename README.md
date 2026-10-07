@@ -11,6 +11,8 @@
   <img src="https://img.shields.io/badge/SQL-Check-0E1630?style=for-the-badge" alt="SQL check">
 </p>
 
+> 📖 **New to data?** [The project explained, from zero](docs/explained.md): every word, every number and the interview questions, in plain words.
+
 <h3 align="center">One in six employees leave. This finds where, why,<br>and the 295 people most likely to go next.</h3>
 
 An HR team sees one in six employees leave but cannot tell where it happens, why, or who is likely to go next, so retention money gets spread across everyone. This Power BI report answers all three and ends with an early-warning list: **295 current employees who carry three or more risk flags**, a group where 35% have already left.

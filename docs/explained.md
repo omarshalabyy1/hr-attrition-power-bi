@@ -61,7 +61,7 @@ Think of the warning lights on a car's dashboard. One light on its own may be no
 | **`CALCULATE`, `REMOVEFILTERS`, `FILTER`, `RELATED`** | `CALCULATE` works out a measure under a changed filter ("only overtime staff"). `REMOVEFILTERS` drops all filters. `FILTER` keeps the rows that pass a test. `RELATED` reads a value from the dimension row an employee points to. |
 | **`PERCENTILE.INC`** | The DAX function that finds Q1 and Q3. It works the same way as Excel's `PERCENTILE.INC`. |
 | **Page, visual, card, slicer** | A report has pages; a page has visuals. A card shows one number ("Leavers 237"). A slicer is a drop-down filter; each of the three report pages has five: job role, gender, age, overtime and department. |
-| **Reference line** | The red dashed line on some charts, at the company rate of 16.12%. Bars to the right of it are worse than the company as a whole. |
+| **Reference line** | The red dashed line on some charts, at the company rate of 16.12%. Bars that reach past it are worse than the company as a whole. |
 | **Tooltip page** | A small hidden page that pops up when you hover over a chart. Here `TT_Segment.`, with the headcount of the segment and a ring chart of how many stayed and left. |
 | **SQL** | Structured Query Language, used to ask a database questions. [`sql/attrition_by_department.sql`](../sql/attrition_by_department.sql) is the one SQL file. |
 | **KPI** | Key performance indicator: the one number that tells you if an action works, such as "attrition within the first two years". |
@@ -174,7 +174,7 @@ The data file is not in the repo. Every number below was recomputed for this pag
 | **Human Resources 25.93% ... Other 13.41%** | Trends education field chart | Rate by field of study. Human Resources is top (7 / 27), then Technical Degree (32 / 132) and Marketing (35 / 159). The chart title names the second and third; the Human Resources group is only 27 people. |
 | **33.73%, 18.93%, 14.40%, 9.03%** | Trends involvement chart | Job involvement 1 to 4: 28 / 83, 71 / 375, 125 / 868, 13 / 144. |
 | **277 / 69 / 24.91%, 1,043 / 156 / 14.96%, 150 / 12 / 8.00%** | Trends travel table | Headcount, leavers and rate for frequent, rare and no travel. 24.91 / 8.00 = 3.1, the "3×" in the title. |
-| **5 slicers** | Top of every page | Job role (labelled "Job Rule"), gender, age band, overtime and department. |
+| **5 slicers** | Top of each of the three report pages (not the Home page) | Job role (labelled "Job Rule"), gender, age band, overtime and department. |
 
 ### The other images
 

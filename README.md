@@ -77,6 +77,8 @@ Found with the 1.5 × IQR rule and kept in the model: 114 employees earn above 1
 
 ![Star schema: fact_employee and seven dimensions](images/data-model.png)
 
+Everything lives inside the .pbix, named by the six layers: the source sheet as loaded is the **Bronze layer**, the staging query's cleaning steps are the **Silver layer**, the calculated columns (age, tenure and income bands, `Risk Flags`) are the **Gold layer**, the star schema is the **Semantic layer**, the 15 measures are the **Analytical layer** and the report pages are the **Reporting layer**.
+
 - **Power Query:** one staging query cleans the sheet; each dimension is built from its distinct values with an index as the surrogate key, and `fact_employee` looks up the seven keys and keeps only the grain (EmployeeNumber), the keys, the `AttritionFlag` and the numeric facts.
 - **Star schema:** `fact_employee` (one row per employee, 1,470 rows) with `dim_department`, `dim_job_role`, `dim_education_field`, `dim_gender`, `dim_marital_status`, `dim_travel` and `dim_overtime`, all one-to-many with a single filter direction. Measures live in their own `_Measures` table.
 - **DAX:** 15 measures written with variables, from `Headcount`, `Leavers` and `Attrition Rate %` to the outlier thresholds (`PERCENTILE.INC` for the 1.5 × IQR rule) and `High-Risk Active Employees`, plus calculated columns for the age, tenure and income bands and the `Risk Flags` count. All of them are in [`dax/measures.dax`](dax/measures.dax), copied out of the model.
@@ -93,7 +95,7 @@ RETURN INT ( _OverTime ) + INT ( _Single ) + INT ( _EntryLevel ) + INT ( _NoStoc
 ```
 
 - **Report:** a home page and three pages (Overview, Drivers, Trends and Outliers), plus a tooltip page for segments.
-- **SQL check:** [`sql/attrition_by_department.sql`](sql/attrition_by_department.sql) counts leavers per department on the raw table (R&D 133, Sales 92, Human Resources 12), matching the report.
+- **SQL check:** [`sql/attrition_by_department.sql`](sql/attrition_by_department.sql) counts leavers per department on the source table (R&D 133, Sales 92, Human Resources 12), matching the report.
 - **Checks:** every number above was recomputed outside Power BI from the model's own tables.
 
 ## ⚠️ Limits

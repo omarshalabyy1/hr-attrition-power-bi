@@ -1,6 +1,7 @@
 // DAX from HR_Attrition_Dashboard.pbix, copied out of the model as is.
+// Layers: the measures are the Analytical layer; the calculated columns are the Gold layer.
 
-// ---- Measures (table _Measures) ----
+// ---- Measures (table _Measures): the Analytical layer ----
 
 Headcount =
 COUNTROWS ( fact_employee )
@@ -66,7 +67,7 @@ Tenure Outliers Count =
 VAR _Threshold = [Tenure Outlier Threshold]
 RETURN COUNTROWS ( FILTER ( fact_employee, fact_employee[YearsAtCompany] > _Threshold ) )
 
-// ---- Calculated columns (table fact_employee) ----
+// ---- Calculated columns (table fact_employee): the Gold layer ----
 
 Age Band =
 VAR _Age = fact_employee[Age]

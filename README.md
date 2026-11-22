@@ -75,7 +75,11 @@ Found with the 1.5 × IQR rule and kept in the model: 114 employees earn above 1
 
 ## 🏗️ How it is built
 
-![Star schema: fact_employee and seven dimensions](images/data-model.png)
+![High level architecture: an Excel sheet loaded by Power Query into HR_Attrition_Dashboard.pbix, five layers inside the file (Bronze: the sheet as loaded; Silver: the employees_staging query types 35 columns, drops 3 constant columns and adds AttritionFlag; Gold: 7 DAX calculated columns; Semantic: 8 tables, 1 fact and 7 dimensions with 7 many-to-one relationships; Analytical: 15 DAX measures), then the Power BI report with the Home, 1-Overview, 2-Drivers and 3-Trends & Outliers pages, and the SQL check](docs/architecture.drawio.svg)
+
+![Data flow, table by table: the Excel sheet feeds employees_staging, which feeds the 7 dimensions and fact_employee; fact_employee looks up all 7 dimensions; the _Measures table reads fact_employee and dim_overtime; the Power BI report reads all 9 model tables; 27 lines, one per read in the .pbix](docs/data-flow.drawio.svg)
+
+![Star schema: fact_employee (1,470 rows, 36 columns including 7 DAX calculated columns) with 7 dimensions (dim_department, dim_education_field, dim_gender, dim_job_role, dim_marital_status, dim_overtime, dim_travel), each joined on its surrogate key by a many-to-one relationship; every column shown with its key mark and type](docs/star-schema.drawio.svg)
 
 Everything lives inside the .pbix, named by the six layers: the source sheet as loaded is the **Bronze layer**, the staging query's cleaning steps are the **Silver layer**, the calculated columns (age, tenure and income bands, `Risk Flags`) are the **Gold layer**, the star schema is the **Semantic layer**, the 15 measures are the **Analytical layer** and the report pages are the **Reporting layer**.
 
